@@ -80,5 +80,12 @@ namespace AutismePlangServer
             //
             //WebSocketServer.ToggleScreens();
         }
+
+        private void iwwerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Open About Window
+            About about = new About();
+            about.ShowDialog();
+        }
     }
 }

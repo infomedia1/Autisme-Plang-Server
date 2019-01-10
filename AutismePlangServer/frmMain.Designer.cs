@@ -62,6 +62,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.lbConnectedClients = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.toolbar = new System.Windows.Forms.ToolStrip();
@@ -78,16 +79,20 @@
             this.addToListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tCheckForModTimer = new System.Windows.Forms.Timer(this.components);
             this.btnTestUpdate = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.hëllefToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iwwerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolbar.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbConnectedClients
             // 
             this.lbConnectedClients.FormattingEnabled = true;
-            this.lbConnectedClients.Location = new System.Drawing.Point(12, 25);
+            this.lbConnectedClients.Location = new System.Drawing.Point(12, 47);
             this.lbConnectedClients.Name = "lbConnectedClients";
             this.lbConnectedClients.Size = new System.Drawing.Size(120, 173);
             this.lbConnectedClients.TabIndex = 0;
@@ -96,7 +101,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 1;
@@ -108,9 +113,9 @@
             this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ServerIP});
             this.toolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.toolbar.Location = new System.Drawing.Point(0, 543);
+            this.toolbar.Location = new System.Drawing.Point(0, 412);
             this.toolbar.Name = "toolbar";
-            this.toolbar.Size = new System.Drawing.Size(1008, 18);
+            this.toolbar.Size = new System.Drawing.Size(422, 18);
             this.toolbar.TabIndex = 2;
             // 
             // ServerIP
@@ -121,7 +126,7 @@
             // 
             // btnReadPlang
             // 
-            this.btnReadPlang.Location = new System.Drawing.Point(12, 470);
+            this.btnReadPlang.Location = new System.Drawing.Point(12, 332);
             this.btnReadPlang.Name = "btnReadPlang";
             this.btnReadPlang.Size = new System.Drawing.Size(120, 70);
             this.btnReadPlang.TabIndex = 3;
@@ -131,7 +136,7 @@
             // 
             // btnSendPlang
             // 
-            this.btnSendPlang.Location = new System.Drawing.Point(138, 470);
+            this.btnSendPlang.Location = new System.Drawing.Point(138, 332);
             this.btnSendPlang.Name = "btnSendPlang";
             this.btnSendPlang.Size = new System.Drawing.Size(120, 70);
             this.btnSendPlang.TabIndex = 4;
@@ -142,9 +147,9 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(138, 25);
+            this.panel1.Location = new System.Drawing.Point(138, 47);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(858, 439);
+            this.panel1.Size = new System.Drawing.Size(256, 275);
             this.panel1.TabIndex = 5;
             // 
             // dataGridView1
@@ -180,7 +185,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 201);
+            this.label2.Location = new System.Drawing.Point(9, 223);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(118, 13);
             this.label2.TabIndex = 6;
@@ -188,7 +193,7 @@
             // 
             // tbUnzuel
             // 
-            this.tbUnzuel.Location = new System.Drawing.Point(12, 217);
+            this.tbUnzuel.Location = new System.Drawing.Point(12, 239);
             this.tbUnzuel.Name = "tbUnzuel";
             this.tbUnzuel.Size = new System.Drawing.Size(31, 20);
             this.tbUnzuel.TabIndex = 7;
@@ -216,7 +221,7 @@
             // 
             // btnTestUpdate
             // 
-            this.btnTestUpdate.Location = new System.Drawing.Point(264, 470);
+            this.btnTestUpdate.Location = new System.Drawing.Point(264, 332);
             this.btnTestUpdate.Name = "btnTestUpdate";
             this.btnTestUpdate.Size = new System.Drawing.Size(130, 70);
             this.btnTestUpdate.TabIndex = 8;
@@ -224,11 +229,36 @@
             this.btnTestUpdate.UseVisualStyleBackColor = true;
             this.btnTestUpdate.Click += new System.EventHandler(this.BtnTestUpdate_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hëllefToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(422, 24);
+            this.menuStrip1.TabIndex = 9;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // hëllefToolStripMenuItem
+            // 
+            this.hëllefToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.iwwerToolStripMenuItem});
+            this.hëllefToolStripMenuItem.Name = "hëllefToolStripMenuItem";
+            this.hëllefToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.hëllefToolStripMenuItem.Text = "Hëllef";
+            // 
+            // iwwerToolStripMenuItem
+            // 
+            this.iwwerToolStripMenuItem.Name = "iwwerToolStripMenuItem";
+            this.iwwerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.iwwerToolStripMenuItem.Text = "Iwwer...";
+            this.iwwerToolStripMenuItem.Click += new System.EventHandler(this.iwwerToolStripMenuItem_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.ClientSize = new System.Drawing.Size(422, 430);
             this.Controls.Add(this.btnTestUpdate);
             this.Controls.Add(this.tbUnzuel);
             this.Controls.Add(this.label2);
@@ -236,8 +266,11 @@
             this.Controls.Add(this.btnSendPlang);
             this.Controls.Add(this.btnReadPlang);
             this.Controls.Add(this.toolbar);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbConnectedClients);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMain";
@@ -248,6 +281,8 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -271,6 +306,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.Timer tCheckForModTimer;
         private System.Windows.Forms.Button btnTestUpdate;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem hëllefToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iwwerToolStripMenuItem;
     }
 }
 

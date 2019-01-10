@@ -63,26 +63,31 @@ namespace AutismePlangServer
         {
             if (CheckRunning) return;
 
+            if (DateTime.Now.DayOfYear > 355) return;
+            if (DateTime.Now.DayOfYear < 7) return;
+
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday) return;
+
             //PowerOn
-          /*  if (!poweron)
-            {*/
-                if (((DateTime.Now.Hour >= 7 && DateTime.Now.Minute >= 25) || DateTime.Now.Hour >= 8) && DateTime.Now.Hour < 17)
-                {
-                    //Console.WriteLine("Powering on");
-                    poweron = await ToggleScreens(true);
-                    //poweron = true;
-                } 
-         //   }
+            /*  if (!poweron)
+              {*/
+            if (((DateTime.Now.Hour >= 7 && DateTime.Now.Minute >= 25) || DateTime.Now.Hour >= 8) && DateTime.Now.Hour < 17)
+            {
+                //Console.WriteLine("Powering on");
+                poweron = await ToggleScreens(true);
+                //poweron = true;
+            }
+            //   }
             //PowerOff
-       /*     if (poweron)
-            {*/
-                if ((DateTime.Now.Hour >= 17) && (DateTime.Now.Minute >= 25 || (DateTime.Now.Hour >= 18)))
-                {
-                    //Console.WriteLine("Powering off");
-                    poweron = await ToggleScreens(false);
-                    //poweron = false;
-                }
-         //   }
+            /*     if (poweron)
+                 {*/
+            if ((DateTime.Now.Hour >= 17) && (DateTime.Now.Minute >= 25 || (DateTime.Now.Hour >= 18)))
+            {
+                //Console.WriteLine("Powering off");
+                poweron = await ToggleScreens(false);
+                //poweron = false;
+            }
+            //   }
 
             //if ((DateTime.Now.Hour >= 9) && (DateTime.Now.Minute >= 45 || (DateTime.Now.Hour >= 10)) && (plangDate <= DateTime.Now))
             if ((DateTime.Now.Hour >= 15) && (DateTime.Now.Minute >= 45 || (DateTime.Now.Hour >= 16)) && (plangDate <= DateTime.Now))
@@ -481,7 +486,7 @@ namespace AutismePlangServer
 
                 if (currentlyrunning != OnOff)
                 {
-                    Console.WriteLine("Powering "+ip+" -> "+OnOff.ToString());
+                    Console.WriteLine("Powering " + ip + " -> " + OnOff.ToString());
                     /* IRCC Toggle Power */
                     var httpClient = new HttpClient();
                     var httpContent = new HttpRequestMessage
@@ -501,13 +506,14 @@ namespace AutismePlangServer
 
                     Console.WriteLine(ip + " # toggle power: " + _response.IsSuccessStatusCode);
                     if (OnOff)
-                    { 
+                    {
                         var empty = await RunDisplayAppAndroid(ip);
                     }
                 }
             }
-            if ((res[0]==res[1]) && (res[1]==res[2]))
-            { return res[0]; } else { return !OnOff; }
+            if ((res[0] == res[1]) && (res[1] == res[2]))
+            { return res[0]; }
+            else { return !OnOff; }
         }
 
         public async static Task<Boolean> RunDisplayAppAndroid(string ip)

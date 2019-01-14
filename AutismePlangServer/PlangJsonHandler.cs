@@ -22,6 +22,14 @@ namespace NSPlang
         [J("concernuserid", NullValueHandling = N.Ignore)] public int Concernuserid { get; set; }
         [J("settoserviceid", NullValueHandling = N.Ignore)] public int Settoserviceid { get; set; }
         [J("userdata", NullValueHandling = N.Ignore)] public Personal Userdata { get; set; }
+        [J("rfidreader", NullValueHandling = N.Ignore)] public RfidReader Rfidreader { get; set; }
+    }
+
+    public partial class RfidReader
+    {
+        [J("rssi", NullValueHandling = N.Ignore)] public int RSSI { get; set; }
+        [J("freq", NullValueHandling = N.Ignore)] public long Freq { get; set; }
+        [J("timestamp", NullValueHandling = N.Ignore)] public long Timestamp { get; set; }
     }
 
     public partial class JsonRes

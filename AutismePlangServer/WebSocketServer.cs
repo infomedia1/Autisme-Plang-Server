@@ -12,6 +12,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+//rewrite socketCode with https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socketasynceventargs?view=netcore-2.1#remarks
+
 namespace AutismePlangServer
 {
     internal class WebSocketServer

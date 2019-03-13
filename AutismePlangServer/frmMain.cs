@@ -12,13 +12,13 @@ namespace AutismePlangServer
             InitializeComponent();
             Self = this;
 
-            WebSocketServer.ScreensClients.Add("knkzb", 1);
+            WebSocketServer.ScreensClients.Add("vblzjko", 1);
             WebSocketServer.ScreensClients.Add("gecbarxm", 2);
             WebSocketServer.ScreensClients.Add("szdddmpdst", 3);
             WebSocketServer.StartUp();
 
             //Not best but easy
-            dataGridView1.Rows.Add("1", "knkzb");
+            dataGridView1.Rows.Add("1", "vblzjko");
             dataGridView1.Rows.Add("2", "gecbarxm");
             dataGridView1.Rows.Add("3", "szdddmpdst");
         }

@@ -13,6 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>ftp://webhost-web02.pt.lu/htdocs/autisme.lu/software/APS/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,13 +25,17 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>http://www.autisme.lu/software/APS/</UpdateUrl>
+    <TargetCulture>lb-LU</TargetCulture>
+    <ProductName>Autisme Plang Server</ProductName>
+    <PublisherName>Autisme Plang Server</PublisherName>
+    <SuiteName>Autisme Plang Server</SuiteName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -64,7 +69,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>779C1B748A38E0AD99568F563EADD42857B5D3B9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2AD23390B56BFB452DDBC24E4728CC8BCA6AD6D1</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

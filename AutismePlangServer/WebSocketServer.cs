@@ -476,7 +476,7 @@ namespace AutismePlangServer
             //actionarr 0=HOME 1=DOWN 2=CONFIRM 3=PowerTv
             string[] actionarr = { "AAAAAQAAAAEAAABgAw==", "AAAAAQAAAAEAAAB1Aw==", "AAAAAQAAAAEAAABlAw==", "AAAAAQAAAAEAAAAVAw==" };
             //string[] ips = { "192.168.1.128", "192.168.1.188", "192.168.1.191" };
-            string[] ips = { "192.168.1.71", "192.168.1.72", "192.168.1.73" };
+            string[] ips = { "192.168.1.71", "192.168.1.72", "192.168.1.73", "192.168.11.71", "192.168.11.72", "192.168.11.73" };
 
             bool[] res = { false, false, false };
             int _c = 0;

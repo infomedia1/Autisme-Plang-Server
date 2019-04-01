@@ -44,20 +44,23 @@ namespace AutismePlangServer
         {
             for (int i = 1; i < clients.Count; i++)
             {
-                bool p1 = clients.ElementAt(i).Value.Poll(1000, SelectMode.SelectWrite);
-                bool p2 = (clients.ElementAt(i).Value.Available == 0);
-                if (p1 && p2)
-                {
-                    //
-                }
-                else
-                {
-                    clients.ElementAt(i).Value.Shutdown(SocketShutdown.Both);
-                    clients.ElementAt(i).Value.Close();
-                    clients.ElementAt(i).Value.Dispose();
-                    string myKey = clients.FirstOrDefault(x => x.Value == clients.ElementAt(i).Value).Key;
-                    clients.Remove(myKey);
-                }
+                try { 
+                    bool p1 = clients.ElementAt(i).Value.Poll(1000, SelectMode.SelectWrite);
+                    bool p2 = (clients.ElementAt(i).Value.Available == 0);
+                    if (p1 && p2)
+                    {
+                        //
+                    }
+                    else
+                    {
+                        clients.ElementAt(i).Value.Shutdown(SocketShutdown.Both);
+                        clients.ElementAt(i).Value.Close();
+                        clients.ElementAt(i).Value.Dispose();
+                        string myKey = clients.FirstOrDefault(x => x.Value == clients.ElementAt(i).Value).Key;
+                        clients.Remove(myKey);
+                    }
+                } catch (Exception ex)
+                { Console.WriteLine("Error: " + ex.Message); }
             }
         }
 
@@ -306,7 +309,7 @@ namespace AutismePlangServer
         {
 #if DEBUG
             Console.WriteLine("#### DEBUG MODE: NOT SETTING SERVER ACTIVE ######");
-#else
+//#else
             var values = new Dictionary<string, string>
             {
                 { "serverip", ServerIPAdress }
@@ -432,13 +435,20 @@ namespace AutismePlangServer
         {
             Console.WriteLine("Shaking Hands");
             Socket sock = ((Socket)AR.AsyncState);
-            int Data = sock.EndReceive(AR);
-            byte[] databyte = new byte[Data];
-            Array.Copy(_buffer, databyte, Data);
+            //int Data = sock.EndReceive(AR);
+            try {
+                int Data = sock.EndReceive(AR);
 
-            String text = Encoding.ASCII.GetString(databyte);
-            List<string> headers = Retriveheaders(text);
-            Acceptuser(headers, sock);
+                byte[] databyte = new byte[Data];
+                Array.Copy(_buffer, databyte, Data);
+
+                String text = Encoding.ASCII.GetString(databyte);
+                List<string> headers = Retriveheaders(text);
+                Acceptuser(headers, sock);
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
         }
 
         private static void BroadcastCurrentMode(String sender, string info)
@@ -475,8 +485,8 @@ namespace AutismePlangServer
 
             //actionarr 0=HOME 1=DOWN 2=CONFIRM 3=PowerTv
             string[] actionarr = { "AAAAAQAAAAEAAABgAw==", "AAAAAQAAAAEAAAB1Aw==", "AAAAAQAAAAEAAABlAw==", "AAAAAQAAAAEAAAAVAw==" };
-            //string[] ips = { "192.168.1.128", "192.168.1.188", "192.168.1.191" };
-            string[] ips = { "192.168.1.71", "192.168.1.72", "192.168.1.73", "192.168.11.71", "192.168.11.72", "192.168.11.73" };
+            string[] ips = { "192.168.1.71", "192.168.1.72", "192.168.1.73" };
+            //string[] ips = { "192.168.1.71", "192.168.1.72", "192.168.1.73", "192.168.11.71", "192.168.11.72", "192.168.11.73" };
 
             bool[] res = { false, false, false };
             int _c = 0;
@@ -503,14 +513,18 @@ namespace AutismePlangServer
                         },
                         Content = new StringContent("<?xml version=\"1.0\"?><s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\" s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"><s:Body><u:X_SendIRCC xmlns:u=\"urn:schemas-sony-com:service:IRCC:1\"><IRCCCode>\"" + actionarr[3] + "\"</IRCCCode></u:X_SendIRCC></s:Body></s:Envelope> ", Encoding.UTF8, "text/xml")
                     };
-
-                    HttpResponseMessage _response = await httpClient.SendAsync(httpContent);
-
-                    Console.WriteLine(ip + " # toggle power: " + _response.IsSuccessStatusCode);
-                    if (OnOff)
+                    try
                     {
-                        var empty = await RunDisplayAppAndroid(ip);
+                        HttpResponseMessage _response = await httpClient.SendAsync(httpContent);
+
+                        Console.WriteLine(ip + " # toggle power: " + _response.IsSuccessStatusCode);
+                        if (OnOff)
+                        {
+                            var empty = await RunDisplayAppAndroid(ip);
+                        }
                     }
+                    catch (Exception ex)
+                    { Console.WriteLine("Error: " + ex.Message); }
                 }
             }
             if ((res[0] == res[1]) && (res[1] == res[2]))
@@ -534,22 +548,26 @@ namespace AutismePlangServer
                     }
                 }
             };
-            var stringPayload = await Task.Run(() => JsonConvert.SerializeObject(content));
+            try { 
+                var stringPayload = await Task.Run(() => JsonConvert.SerializeObject(content));
 
-            var httpClient = new HttpClient();
-            var httpContent = new HttpRequestMessage
-            {
-                RequestUri = new Uri("http://" + ip + "/sony/appControl"),
-                Method = HttpMethod.Post,
-                Headers =
+                var httpClient = new HttpClient();
+                var httpContent = new HttpRequestMessage
                 {
-                    { HttpRequestHeader.ContentType.ToString(), "application/json" },
-                    { "X-Auth-PSK", "1337" }
-                },
-                Content = new StringContent(stringPayload)
-            };
+                    RequestUri = new Uri("http://" + ip + "/sony/appControl"),
+                    Method = HttpMethod.Post,
+                    Headers =
+                    {
+                        { HttpRequestHeader.ContentType.ToString(), "application/json" },
+                        { "X-Auth-PSK", "1337" }
+                    },
+                    Content = new StringContent(stringPayload)
+                };
 
-            HttpResponseMessage _response = await httpClient.SendAsync(httpContent);
+                HttpResponseMessage _response = await httpClient.SendAsync(httpContent);
+            }
+            catch (Exception ex)
+            { Console.WriteLine("Error: " + ex.Message); }
             return true;
         }
 
@@ -576,35 +594,38 @@ namespace AutismePlangServer
                 },
                 Content = new StringContent(stringPayload)
             };
-
-            HttpResponseMessage _response = await httpClient.SendAsync(httpContent);
-            if (_response.Content != null)
-            {
-                var responseContent = await _response.Content.ReadAsStringAsync();
-                var _res = JsonConvert.DeserializeObject<SonySystem>(responseContent);
-                //Console.WriteLine(_res.Result.First<SonyResult>().Status);
-                if (_res.Result.First<SonyResult>().Status == "active")
+            try { 
+                HttpResponseMessage _response = await httpClient.SendAsync(httpContent);
+                if (_response.Content != null)
                 {
-                    //Console.WriteLine
-                    return true;
+                    var responseContent = await _response.Content.ReadAsStringAsync();
+                    var _res = JsonConvert.DeserializeObject<SonySystem>(responseContent);
+                    //Console.WriteLine(_res.Result.First<SonyResult>().Status);
+                    if (_res.Result.First<SonyResult>().Status == "active")
+                    {
+                        //Console.WriteLine
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
                     return false;
                 }
-            }
-            else
-            {
+            } catch (Exception ex)
+            { Console.WriteLine("Error: " + ex.Message);
                 return false;
             }
         }
 
         private static void Datadecode(byte[] rawdata)
         {
-            /*Console.WriteLine("Message Unmasking\n");*/
+  
             var fin = rawdata[0] & 0x81;
             bool res = fin != 129;
-            /*Console.WriteLine("Opcode:" + res);*/
             var Lenght = rawdata[1] & 127;
             byte b = rawdata[1];
             int totalLength = 0;
@@ -659,46 +680,6 @@ namespace AutismePlangServer
                 }
             }
             catch (Exception e) { Console.WriteLine(e.Message); }
-
-            /*
-            if (message.Substring(0, 3) == "TAG")
-            {
-                int ml = message.Length - 4;
-                bool _online = false;
-                int _userid = Int32.Parse(message.Substring(4, ml));
-                if (_userid < 100)
-                {
-                    foreach (WSPlang.Services atelier in plang.Ateliers)
-                    {
-                        foreach (WSPlang.Encadrants encadrant in atelier.EncadrantsMoies)
-                        {
-                            if (encadrant.UserId == _userid)
-                            {
-                                encadrant.Present = !encadrant.Present;
-                                _online = encadrant.Present;
-                            }
-                        }
-                        foreach (WSPlang.Encadrants encadrant in atelier.EncadrantsMettes)
-                        {
-                            if (encadrant.UserId == _userid)
-                            {
-                                encadrant.Present = !encadrant.Present;
-                                _online = encadrant.Present;
-                            }
-                        }
-                    }
-                }
-
-                if (_online)
-                {
-                    UpdateClient("PlangClient", _userid.ToString(), "ON");
-                }
-                else
-                {
-                    UpdateClient("PlangClient", _userid.ToString(), "OFF");
-                }
-            }
-            */
         }
 
         private async static void InsertNewUser(Response res)
@@ -799,14 +780,13 @@ namespace AutismePlangServer
             start(insock);
             void start(Socket sock)
             {
-                //Console.WriteLine("Looping Handle: " + sock.Handle);
                 byte[] m_buffer = new byte[10000];
                 try
                 {
                     sock.BeginReceive(m_buffer, 0, m_buffer.Length, SocketFlags.None, ar =>
                     {
                         try { int dat = sock.EndReceive(ar); processdata(m_buffer, dat, ar); }
-                        catch (SocketException se) { Console.WriteLine("Error: " + se.Message); }
+                        catch (Exception se) { Console.WriteLine("Error: " + se.Message); }
                     }, sock);
                 }
                 catch (Exception e) { Console.WriteLine("Error Occured Begin Receive: " + e.Message); }
@@ -814,56 +794,59 @@ namespace AutismePlangServer
 
             void processdata(byte[] r_buffer, int size, IAsyncResult AR)
             {
-                Socket sockp = ((Socket)AR.AsyncState);
-                /*Console.WriteLine("Data Received: " + size);
-                Console.WriteLine("IAsync Result: " + AR.AsyncState);
-                Console.WriteLine("Opcode" + (r_buffer[0] & 81));*/
-                switch (r_buffer[0] & 81)
-                {
-                    case 1:
-                        Datadecode(r_buffer);
-                        start(sockp);
-                        break;
+                try { 
+                    Socket sockp = ((Socket)AR.AsyncState);
+                    switch (r_buffer[0] & 81)
+                    {
+                        case 1:
+                            Datadecode(r_buffer);
+                            start(sockp);
+                            break;
 
-                    case 0:
-                        if (size == 6)
-                        {
-                            string myKey = clients.FirstOrDefault(x => x.Value == sockp).Key;
-                            if (myKey != null)
+                        case 0:
+                            if (size == 6)
                             {
-                                Close_frame(sockp);
-                                sockp.Shutdown(SocketShutdown.Both);
-                                sockp.Close();
-                                sockp.Dispose();
-                                try { clients.Remove(myKey); }
-                                catch (Exception e)
-                                { Console.WriteLine(e.Message); }
+                                string myKey = clients.FirstOrDefault(x => x.Value == sockp).Key;
+                                if (myKey != null)
+                                {
+                                    Close_frame(sockp);
+                                    sockp.Shutdown(SocketShutdown.Both);
+                                    sockp.Close();
+                                    sockp.Dispose();
+                                    try { clients.Remove(myKey); }
+                                    catch (Exception e)
+                                    { Console.WriteLine(e.Message); }
+                                }
+                                else
+                                {
+                                    sockp.Shutdown(SocketShutdown.Both);
+                                    sockp.Close();
+                                    sockp.Dispose();
+                                }
                             }
                             else
                             {
                                 sockp.Shutdown(SocketShutdown.Both);
                                 sockp.Close();
                                 sockp.Dispose();
+                                string myKey = clients.FirstOrDefault(x => x.Value == sockp).Key;
+                                if (myKey != null) clients.Remove(myKey);
+
+                                frmMain.Self.CleanupItems();
+
+                                for (int i = 1; i < clients.Count; i++)
+                                { frmMain.Self.AddItemToList(clients.ElementAt(i).Key.ToString()); }
                             }
-                        }
-                        else
-                        {
-                            sockp.Shutdown(SocketShutdown.Both);
-                            sockp.Close();
-                            sockp.Dispose();
-                            string myKey = clients.FirstOrDefault(x => x.Value == sockp).Key;
-                            if (myKey != null) clients.Remove(myKey);
+                            break;
 
-                            frmMain.Self.CleanupItems();
-
-                            for (int i = 1; i < clients.Count; i++)
-                            { frmMain.Self.AddItemToList(clients.ElementAt(i).Key.ToString()); }
-                        }
-                        break;
-
-                    default:
-                        Console.WriteLine("Default Switch");
-                        break;
+                        default:
+                            Console.WriteLine("Default Switch");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
                 }
             }
         }

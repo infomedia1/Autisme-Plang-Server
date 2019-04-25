@@ -89,7 +89,10 @@ namespace AutismePlangServer
             if ((DateTime.Now.Hour >= 17) && (DateTime.Now.Minute >= 25 || (DateTime.Now.Hour >= 18)))
             {
                 //Console.WriteLine("Powering off");
-                poweron = await ToggleScreens(false);
+                if (DateTime.Now.DayOfYear == 115)
+                {
+                    if (DateTime.Now.Hour >= 22) { await ToggleScreens(false); }
+                } else poweron = await ToggleScreens(false);
                 //poweron = false;
             }
             //   }

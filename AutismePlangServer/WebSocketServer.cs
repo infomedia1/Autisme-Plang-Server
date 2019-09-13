@@ -92,6 +92,9 @@ namespace AutismePlangServer
                 if (DateTime.Now.DayOfYear == 115)
                 {
                     if (DateTime.Now.Hour >= 22) { await ToggleScreens(false); }
+                } else if (DateTime.Now.DayOfYear == 182)
+                {
+                    if (DateTime.Now.Hour >= 23) { await ToggleScreens(false); }
                 } else poweron = await ToggleScreens(false);
                 //poweron = false;
             }
@@ -261,6 +264,7 @@ namespace AutismePlangServer
                             break;
 
                         case 3:
+                            if (plang.Content.Services[i].Id == 36) plangtemp.Content.Services.Add(plang.Content.Services[i]); //LaserTec
                             if (plang.Content.Services[i].Id == 31) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Congé
                             if (plang.Content.Services[i].Id == 32) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Krank
                             if (plang.Content.Services[i].Id == 33) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Formatioun

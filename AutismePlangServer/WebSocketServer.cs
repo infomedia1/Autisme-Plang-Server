@@ -264,7 +264,7 @@ namespace AutismePlangServer
                             break;
 
                         case 3:
-                            if (plang.Content.Services[i].Id == 36) plangtemp.Content.Services.Add(plang.Content.Services[i]); //LaserTec
+                            if (plang.Content.Services[i].Id == 30) plangtemp.Content.Services.Add(plang.Content.Services[i]); //LaserTec
                             if (plang.Content.Services[i].Id == 31) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Congé
                             if (plang.Content.Services[i].Id == 32) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Krank
                             if (plang.Content.Services[i].Id == 33) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Formatioun

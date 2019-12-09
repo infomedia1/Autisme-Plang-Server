@@ -44,7 +44,8 @@ namespace AutismePlangServer
         {
             for (int i = 1; i < clients.Count; i++)
             {
-                try { 
+                try
+                {
                     bool p1 = clients.ElementAt(i).Value.Poll(1000, SelectMode.SelectWrite);
                     bool p2 = (clients.ElementAt(i).Value.Available == 0);
                     if (p1 && p2)
@@ -59,7 +60,8 @@ namespace AutismePlangServer
                         string myKey = clients.FirstOrDefault(x => x.Value == clients.ElementAt(i).Value).Key;
                         clients.Remove(myKey);
                     }
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 { Console.WriteLine("Error: " + ex.Message); }
             }
         }
@@ -92,7 +94,12 @@ namespace AutismePlangServer
                 if (DateTime.Now.DayOfYear == 115)
                 {
                     if (DateTime.Now.Hour >= 22) { await ToggleScreens(false); }
-                } else poweron = await ToggleScreens(false);
+                }
+                else if (DateTime.Now.DayOfYear == 182)
+                {
+                    if (DateTime.Now.Hour >= 23) { await ToggleScreens(false); }
+                }
+                else poweron = await ToggleScreens(false);
                 //poweron = false;
             }
             //   }
@@ -261,6 +268,7 @@ namespace AutismePlangServer
                             break;
 
                         case 3:
+                            if (plang.Content.Services[i].Id == 30) plangtemp.Content.Services.Add(plang.Content.Services[i]); //LaserTec
                             if (plang.Content.Services[i].Id == 31) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Congé
                             if (plang.Content.Services[i].Id == 32) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Krank
                             if (plang.Content.Services[i].Id == 33) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Formatioun
@@ -312,7 +320,7 @@ namespace AutismePlangServer
         {
 #if DEBUG
             Console.WriteLine("#### DEBUG MODE: NOT SETTING SERVER ACTIVE ######");
-#else
+            //#else
             var values = new Dictionary<string, string>
             {
                 { "serverip", ServerIPAdress }
@@ -439,7 +447,8 @@ namespace AutismePlangServer
             Console.WriteLine("Shaking Hands");
             Socket sock = ((Socket)AR.AsyncState);
             //int Data = sock.EndReceive(AR);
-            try {
+            try
+            {
                 int Data = sock.EndReceive(AR);
 
                 byte[] databyte = new byte[Data];
@@ -448,7 +457,8 @@ namespace AutismePlangServer
                 String text = Encoding.ASCII.GetString(databyte);
                 List<string> headers = Retriveheaders(text);
                 Acceptuser(headers, sock);
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
             }
@@ -490,7 +500,7 @@ namespace AutismePlangServer
             string[] actionarr = { "AAAAAQAAAAEAAABgAw==", "AAAAAQAAAAEAAAB1Aw==", "AAAAAQAAAAEAAABlAw==", "AAAAAQAAAAEAAAAVAw==" };
             //string[] ips = { "192.168.1.71", "192.168.1.72", "192.168.1.73" };
             //string[] ips = { "192.168.1.71", "192.168.1.72", "192.168.1.73", "192.168.11.71", "192.168.11.72", "192.168.11.73" };
-            string[] ips = {  "192.168.11.71", "192.168.11.72", "192.168.11.73" };
+            string[] ips = { "192.168.11.71", "192.168.11.72", "192.168.11.73" };
 
             bool[] res = { false, false, false };
             int _c = 0;
@@ -552,7 +562,8 @@ namespace AutismePlangServer
                     }
                 }
             };
-            try { 
+            try
+            {
                 var stringPayload = await Task.Run(() => JsonConvert.SerializeObject(content));
 
                 var httpClient = new HttpClient();
@@ -598,7 +609,8 @@ namespace AutismePlangServer
                 },
                 Content = new StringContent(stringPayload)
             };
-            try { 
+            try
+            {
                 HttpResponseMessage _response = await httpClient.SendAsync(httpContent);
                 if (_response.Content != null)
                 {
@@ -619,15 +631,17 @@ namespace AutismePlangServer
                 {
                     return false;
                 }
-            } catch (Exception ex)
-            { Console.WriteLine("Error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
                 return false;
             }
         }
 
         private static void Datadecode(byte[] rawdata)
         {
-  
+
             var fin = rawdata[0] & 0x81;
             bool res = fin != 129;
             var Lenght = rawdata[1] & 127;
@@ -798,7 +812,8 @@ namespace AutismePlangServer
 
             void processdata(byte[] r_buffer, int size, IAsyncResult AR)
             {
-                try { 
+                try
+                {
                     Socket sockp = ((Socket)AR.AsyncState);
                     switch (r_buffer[0] & 81)
                     {

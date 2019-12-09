@@ -29,7 +29,7 @@
     <PublisherName>Autisme Plang Server</PublisherName>
     <SuiteName>Autisme Plang Server</SuiteName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>28</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -68,7 +68,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>A3BA6BBEF4AD749F6F6CB50CC5A883093D64F7DB</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>A7D77C36D8140613DBDEFF41404C2ECB39C4DC5A</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -83,7 +83,8 @@
     <ApplicationIcon>Main_Res\icon_autisme.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>AutismePlangServer_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">

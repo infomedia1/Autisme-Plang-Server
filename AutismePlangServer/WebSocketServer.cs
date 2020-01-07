@@ -71,7 +71,7 @@ namespace AutismePlangServer
             if (CheckRunning) return;
 
             if (DateTime.Now.DayOfYear > 355) return;
-            if (DateTime.Now.DayOfYear < 7) return;
+            if (DateTime.Now.DayOfYear < 1) return;
 
             if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday) return;
 

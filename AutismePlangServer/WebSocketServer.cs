@@ -263,8 +263,9 @@ namespace AutismePlangServer
                             if (plang.Content.Services[i].Id == 22) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Konfiserie
                             if (plang.Content.Services[i].Id == 23) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Backoffice
                             if (plang.Content.Services[i].Id == 24) plangtemp.Content.Services.Add(plang.Content.Services[i]); //InfoMedia
-                            if (plang.Content.Services[i].Id == 25) plangtemp.Content.Services.Add(plang.Content.Services[i]); //SFP
-                            if (plang.Content.Services[i].Id == 26) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Kefa
+                            if (plang.Content.Services[i].Id == 25) plangtemp.Content.Services.Add(plang.Content.Services[i]); //SFP1
+                            if (plang.Content.Services[i].Id == 26) plangtemp.Content.Services.Add(plang.Content.Services[i]); //SFP2
+                            if (plang.Content.Services[i].Id == 27) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Kefa
                             if (plang.Content.Services[i].Id == 34) plangtemp.Content.Services.Add(plang.Content.Services[i]); // DOKU
                             // if (plang.Content.Services[i].id == 27) plangtemp.Content.Services.Add(plang.Content.Services[i]); //EXTRA CONTENT
                             break;

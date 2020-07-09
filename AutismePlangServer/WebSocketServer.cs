@@ -246,6 +246,7 @@ namespace AutismePlangServer
                     {
                         case 1:
                             if (plang.Content.Services[i].Id == 11) plangtemp.Content.Services.Add(plang.Content.Services[i]); //CDJ
+                            if (plang.Content.Services[i].Id == 19) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Neien Atelier
                             if (plang.Content.Services[i].Id == 12) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Dreckerei
                             if (plang.Content.Services[i].Id == 13) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Pabeier
                             if (plang.Content.Services[i].Id == 14) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Gaart
@@ -253,7 +254,8 @@ namespace AutismePlangServer
                             if (plang.Content.Services[i].Id == 16) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Wäscherei
                                                                                                                                // if (plang.Content.Services[i].id == 17) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Kichen
                             if (plang.Content.Services[i].Id == 17) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Service Technique
-                            if (plang.Content.Services[i].Id == 18) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Service Technique
+                            if (plang.Content.Services[i].Id == 18) plangtemp.Content.Services.Add(plang.Content.Services[i]); //Apaken
+
                             break;
 
                         case 2:

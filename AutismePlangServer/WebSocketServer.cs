@@ -88,8 +88,9 @@ namespace AutismePlangServer
             //PowerOff
             /*     if (poweron)
                  {*/
-            if ((DateTime.Now.Hour >= 17) && (DateTime.Now.Minute >= 25 || (DateTime.Now.Hour >= 18)))
-            {
+            //if ((DateTime.Now.Hour >= 17) && (DateTime.Now.Minute >= 25 || (DateTime.Now.Hour >= 18)))
+            if (DateTime.Now.Hour >= 20)
+                {
                 //Console.WriteLine("Powering off");
                 if (DateTime.Now.DayOfYear == 115)
                 {

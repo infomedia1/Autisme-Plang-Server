@@ -24,12 +24,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>http://www.autisme.lu/software/APS/</UpdateUrl>
+    <UpdateUrl>https://www.autisme.lu/software/APS/</UpdateUrl>
     <ProductName>Autisme Plang Server</ProductName>
     <PublisherName>Autisme Plang Server</PublisherName>
     <SuiteName>Autisme Plang Server</SuiteName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>36</ApplicationRevision>
     <ApplicationVersion>0.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -68,7 +68,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>A7D77C36D8140613DBDEFF41404C2ECB39C4DC5A</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F7FD21DE5C094269087373AD2388D0849D77B431</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -83,8 +83,7 @@
     <ApplicationIcon>Main_Res\icon_autisme.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>AutismePlangServer_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
@@ -139,6 +138,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="AutismePlangServer.snk" />
+    <None Include="AutismePlangServer_1_TemporaryKey.pfx" />
     <None Include="AutismePlangServer_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
